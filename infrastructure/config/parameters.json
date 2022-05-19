@@ -1,0 +1,15 @@
+
+[
+    {
+        "ParameterKey"  : "Key",
+        "ParameterValue"    : "test"
+    },
+    {
+        "ParameterKey"  : "Body",
+        "ParameterValue"    : "test"
+    },
+    {
+        "ParameterKey"  : "BucketName",
+        "ParameterValue"    : "s3://testbucket-101010/"
+    }
+]

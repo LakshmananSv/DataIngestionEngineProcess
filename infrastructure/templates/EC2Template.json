@@ -1,0 +1,54 @@
+{
+    "Description": "Creating EC2 Template",
+    "Resources": {
+        "IngestionEngineEC2": {
+            "CreationPolicy": {
+                "ResourceSignal": {
+                    "Count": 1,
+                    "Timeout": "PT60M"
+                }
+            },
+            "Properties": {
+                "Cooldown": 300,
+                "DesiredCapacity": 1,
+                "LaunchConfigurationName": {
+                    "Ref": "IngestionEngineEC2LaunchConfiguration"
+                },
+                "MaxSize": 2,
+                "MinSize": 1,
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "PropagateAtLaunch": true,
+                        "Value": "IngestionEngine"
+                    }
+                ],
+                "VPCZoneIdentifier": [
+                    "subnet-38ffad51",
+                    "subnet-0c1e8076"
+                ]
+            },
+            "Type": "AWS::AutoScaling::AutoScalingGroup",
+            "UpdatePolicy": {
+                "AutoScalingRollingUpdate": {
+                    "MaxBatchSize": 1,
+                    "MinInstancesInService": 0,
+                    "MinSuccessfulInstancesPercent": 100,
+                    "PauseTime": "PT60M",
+                    "WaitOnResourceSignals": "true"
+                }
+            }
+        },
+        "IngestionEngineEC2LaunchConfiguration": {
+            "Properties": {
+                "IamInstanceProfile": "ingestion_engine_ec2_role",
+                "ImageId": "ami-032e5b6af8a711f30",
+                "InstanceType": "t2.micro",
+                "SecurityGroups": [
+                    "sg-07870dec94ee522a0"
+                ]
+            },
+            "Type": "AWS::AutoScaling::LaunchConfiguration"
+        }
+    }
+}

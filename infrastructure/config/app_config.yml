@@ -1,0 +1,32 @@
+config:
+  CFT:
+    tags:
+      asg:
+       - Key: 'Name'
+         Value: 'IngestionEngine'
+         PropagateAtLaunch: True
+    asg:
+      name: IngestionEngineEC2
+      capacity:
+        desired: 1
+        max: 2
+        min: 1
+      subnets:
+        - subnet-38ffad51
+        - subnet-0c1e8076
+      createpolicy:
+        count: 1
+        timeout: PT60M
+      updatepolicy:
+        maxbatchsize: 1
+        waitonresourcesignal: True
+        pausetime: PT60M
+        mininstances: 0
+        minsucinstpercent: 100
+    lc:
+      name: IngestionEngineEC2LaunchConfiguration
+      type: t2.micro
+      ami: ami-032e5b6af8a711f30
+      instance_role: ingestion_engine_ec2_role
+      sgs:
+        - sg-07870dec94ee522a0

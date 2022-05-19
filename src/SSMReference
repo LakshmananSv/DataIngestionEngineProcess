@@ -1,0 +1,6 @@
+{ 
+    'host' : 'customer-config.cvfm1fk8e5de.eu-west-2.rds.amazonaws.com'
+    'username' : 'devingestion'
+    'password' : 'D3v1ng3st1on!'
+
+}
